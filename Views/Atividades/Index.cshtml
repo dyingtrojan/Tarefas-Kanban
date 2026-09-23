@@ -1,0 +1,65 @@
+@model IEnumerable<Tarefas_Kanban.Models.Atividade>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nomeSetor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prioridade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dataCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.usuario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nomeSetor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prioridade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dataCadastro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario.Id)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdAtividade">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdAtividade">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdAtividade">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
