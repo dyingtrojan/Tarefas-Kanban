@@ -46,9 +46,9 @@ namespace Tarefas_Kanban.Controllers
         }
 
         // GET: Atividades/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["IdUsuario"] = new SelectList(_context.Set<Usuario>(), "Id", "Id");
+            ViewBag.Usuarios = new SelectList(await _context.Usuario.ToListAsync(), "Id", "nome");
             return View();
         }
 
@@ -59,13 +59,17 @@ namespace Tarefas_Kanban.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdAtividade,IdUsuario,descricao,nomeSetor,prioridade,dataCadastro,status")] Atividade atividade)
         {
+            atividade.status = "A fazer";
+            atividade.dataCadastro = DateOnly.FromDateTime(DateTime.Now);
+            ModelState.Remove(nameof(Atividade.status));
+            ModelState.Remove(nameof(Atividade.usuario));
             if (ModelState.IsValid)
             {
                 _context.Add(atividade);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdUsuario"] = new SelectList(_context.Set<Usuario>(), "Id", "Id", atividade.IdUsuario);
+            ViewBag.Usuarios = new SelectList(await _context.Usuario.ToListAsync(), "Id", "nome", atividade.IdUsuario);
             return View(atividade);
         }
 
@@ -82,7 +86,7 @@ namespace Tarefas_Kanban.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdUsuario"] = new SelectList(_context.Set<Usuario>(), "Id", "Id", atividade.IdUsuario);
+            ViewBag.Usuarios = new SelectList(await _context.Usuario.ToListAsync(), "Id", "nome", atividade.IdUsuario);
             return View(atividade);
         }
 
@@ -118,7 +122,7 @@ namespace Tarefas_Kanban.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdUsuario"] = new SelectList(_context.Set<Usuario>(), "Id", "Id", atividade.IdUsuario);
+            ViewBag.Usuarios = new SelectList(await _context.Usuario.ToListAsync(), "Id", "nome", atividade.IdUsuario);
             return View(atividade);
         }
 
