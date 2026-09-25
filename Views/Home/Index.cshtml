@@ -1,8 +1,105 @@
-﻿@{
+﻿@model List<Atividade>
+
+@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Para fazer</h1>
+      @foreach (var item in Model){
+        if (item.status == "A fazer"){
+          <div>
+              <p><b>Descrição: </b>@item.descricao</p>
+              <p><b>Setor: </b>@item.nomeSetor</p>
+              <p><b>Prioridade: </b>@item.prioridade</p>
+              <p><b>Vinculado a: </b>@item.usuario.nome</p>
+              <a class="btn btn-primary" asp-controller="Atividades" asp-action="Edit" asp-route-id="@item.IdAtividade">Editar</a>
+              <button class="btn btn-primary" asp-controller="Atividades" asp-action="Delete" asp-route-id="@item.IdAtividade">Excluir</button>
+              <div>
+                <form asp-controller="Home" asp-action="AlterarStatus" method="post">
+                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  <input type="hidden" name="id" value="@item.IdAtividade" />
+                  <p><b>Status</b></p>
+                  <input type="radio" name="status" id="para-fazer-@item.IdAtividade" value="A fazer">
+                  <label for="para-fazer-@item.IdAtividade">Para fazer</label>
+                  <input type="radio" name="status" id="fazendo-@item.IdAtividade" value="fazendo">
+                  <label for="fazendo-@item.IdAtividade">Fazendo</label>
+                  <input type="radio" name="status" id="completo-@item.IdAtividade" value="completo">
+                  <label for="completo-@item.IdAtividade">Completo</label>
+                  <div class="form-group">
+                    <button class="btn btn-primary" type="submit" value="Save">Alterar Status</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <br />
+        }
+      }
+    </div>
+    <div class="col-sm">
+      <h1>Fazendo</h1>
+        @foreach (var item in Model){
+        if (item.status == "fazendo"){
+          <div>
+              <p><b>Descrição: </b>@item.descricao</p>
+              <p><b>Setor: </b>@item.nomeSetor</p>
+              <p><b>Prioridade: </b>@item.prioridade</p>
+              <p><b>Vinculado a: </b>@item.usuario.nome</p>
+              <button class="btn btn-primary">Editar</button>
+              <button class="btn btn-primary">Excluir</button>
+              <div>
+                <form asp-controller="Home" asp-action="AlterarStatus" method="post">
+                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  <input type="hidden" name="id" value="@item.IdAtividade" />
+                  <p><b>Status</b></p>
+                  <input type="radio" name="status" id="para-fazer-@item.IdAtividade" value="A fazer">
+                  <label for="para-fazer-@item.IdAtividade">Para fazer</label>
+                  <input type="radio" name="status" id="fazendo-@item.IdAtividade" value="fazendo">
+                  <label for="fazendo-@item.IdAtividade">Fazendo</label>
+                  <input type="radio" name="status" id="completo-@item.IdAtividade" value="completo">
+                  <label for="completo-@item.IdAtividade">Completo</label>
+                  <div class="form-group">
+                    <button class="btn btn-primary" type="submit" value="Save">Alterar Status</button>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <br />
+        }
+      }
+    </div>
+    <div class="col-sm">
+      <h1>Completo</h1>
+        @foreach (var item in Model){
+          if (item.status == "completo"){
+            <div>
+                <p><b>Descrição: </b>@item.descricao</p>
+                <p><b>Setor: </b>@item.nomeSetor</p>
+                <p><b>Prioridade: </b>@item.prioridade</p>
+                <p><b>Vinculado a: </b>@item.usuario.nome</p>
+                <button class="btn btn-primary">Editar</button>
+                <button class="btn btn-primary">Excluir</button>
+                <div>
+                <form asp-controller="Home" asp-action="AlterarStatus" method="post">
+                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                  <input type="hidden" name="id" value="@item.IdAtividade" />
+                  <p><b>Status</b></p>
+                  <input type="radio" name="status" id="para-fazer-@item.IdAtividade" value="A fazer">
+                  <label for="para-fazer-@item.IdAtividade">Para fazer</label>
+                  <input type="radio" name="status" id="fazendo-@item.IdAtividade" value="fazendo">
+                  <label for="fazendo-@item.IdAtividade">Fazendo</label>
+                  <input type="radio" name="status" id="completo-@item.IdAtividade" value="completo">
+                  <label for="completo-@item.IdAtividade">Completo</label>
+                  <div class="form-group">
+                    <button class="btn btn-primary" type="submit" value="Save">Alterar Status</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <br />
+          }
+      }
+    </div>
+  </div>
+</div>  

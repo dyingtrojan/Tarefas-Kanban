@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+.navbar {
+  background: #0056b3 !important;
+}
+.navbar-nav {
+  justify-content: end;
+}

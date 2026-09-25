@@ -11,11 +11,7 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IdUsuario" class="control-label"></label>
-                <select asp-for="IdUsuario" class ="form-control" asp-items="ViewBag.IdUsuario"></select>
-            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="descricao" class="control-label"></label>
                 <input asp-for="descricao" class="form-control" />
@@ -23,7 +19,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="nomeSetor" class="control-label"></label>
-                <input asp-for="nomeSetor" class="form-control" />
+                <select asp-for="nomeSetor" class="form-control">
+                    <option value="Alta">Alta</option>
+                    <option value="Media">Media</option>
+                    <option value="Baixa">Baixa</option>
+                </select>
                 <span asp-validation-for="nomeSetor" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -33,13 +33,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="dataCadastro" class="control-label"></label>
-                <input asp-for="dataCadastro" class="form-control" />
+                <input asp-for="dataCadastro" class="form-control" type="date" />
                 <span asp-validation-for="dataCadastro" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="status" class="control-label"></label>
-                <input asp-for="status" class="form-control" />
-                <span asp-validation-for="status" class="text-danger"></span>
+            <div class="form-group mb-3">
+                <label asp-for="IdUsuario" class="control-label">Atribuir ao Usuário</label>
+                <select asp-for="IdUsuario" class="form-select" asp-items="ViewBag.Usuarios">
+                    <option value="">-- Selecione um Usuário --</option>
+                </select>
+                <span asp-validation-for="IdUsuario" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
