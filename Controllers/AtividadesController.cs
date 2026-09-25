@@ -60,7 +60,7 @@ namespace Tarefas_Kanban.Controllers
         public async Task<IActionResult> Create([Bind("IdAtividade,IdUsuario,descricao,nomeSetor,prioridade,dataCadastro,status")] Atividade atividade)
         {
             atividade.status = "A fazer";
-            atividade.dataCadastro = DateOnly.FromDateTime(DateTime.Now);
+            atividade.dataCadastro = DateTime.Today;
             ModelState.Remove(nameof(Atividade.status));
             ModelState.Remove(nameof(Atividade.usuario));
             if (ModelState.IsValid)
@@ -97,6 +97,8 @@ namespace Tarefas_Kanban.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdAtividade,IdUsuario,descricao,nomeSetor,prioridade,dataCadastro,status")] Atividade atividade)
         {
+            ModelState.Remove(nameof(Atividade.status));
+            ModelState.Remove(nameof(Atividade.usuario));
             if (id != atividade.IdAtividade)
             {
                 return NotFound();
@@ -120,6 +122,7 @@ namespace Tarefas_Kanban.Controllers
                         throw;
                     }
                 }
+                
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Usuarios = new SelectList(await _context.Usuario.ToListAsync(), "Id", "nome", atividade.IdUsuario);

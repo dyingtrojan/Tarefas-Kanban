@@ -34,6 +34,11 @@ a {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
+.task {
+  background: gainsboro;
+  border: 1px solid black;
+}
+
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
