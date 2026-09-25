@@ -11,8 +11,8 @@ namespace Tarefas_Kanban.Models
         public string descricao { get; set; }
         public string nomeSetor { get; set; }
         public string prioridade { get; set; }
-        [NotMapped]
-        public DateOnly dataCadastro { get; set; }
+
+        public DateTime dataCadastro { get; set; }
         public string status { get; set; }
 
         [ForeignKey("IdUsuario")]

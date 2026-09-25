@@ -9,13 +9,13 @@
       <h1>Para fazer</h1>
       @foreach (var item in Model){
         if (item.status == "A fazer"){
-          <div>
+          <div class="task">
               <p><b>Descrição: </b>@item.descricao</p>
               <p><b>Setor: </b>@item.nomeSetor</p>
               <p><b>Prioridade: </b>@item.prioridade</p>
               <p><b>Vinculado a: </b>@item.usuario.nome</p>
               <a class="btn btn-primary" asp-controller="Atividades" asp-action="Edit" asp-route-id="@item.IdAtividade">Editar</a>
-              <button class="btn btn-primary" asp-controller="Atividades" asp-action="Delete" asp-route-id="@item.IdAtividade">Excluir</button>
+              <a class="btn btn-primary" asp-controller="Atividades" asp-action="Delete" asp-route-id="@item.IdAtividade">Excluir</a>
               <div>
                 <form asp-controller="Home" asp-action="AlterarStatus" method="post">
                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -41,13 +41,13 @@
       <h1>Fazendo</h1>
         @foreach (var item in Model){
         if (item.status == "fazendo"){
-          <div>
+          <div class="task">
               <p><b>Descrição: </b>@item.descricao</p>
               <p><b>Setor: </b>@item.nomeSetor</p>
               <p><b>Prioridade: </b>@item.prioridade</p>
               <p><b>Vinculado a: </b>@item.usuario.nome</p>
-              <button class="btn btn-primary">Editar</button>
-              <button class="btn btn-primary">Excluir</button>
+              <a class="btn btn-primary" asp-controller="Atividades" asp-action="Edit" asp-route-id="@item.IdAtividade">Editar</a>
+              <a class="btn btn-primary" asp-controller="Atividades" asp-action="Delete" asp-route-id="@item.IdAtividade">Excluir</a>
               <div>
                 <form asp-controller="Home" asp-action="AlterarStatus" method="post">
                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -73,13 +73,13 @@
       <h1>Completo</h1>
         @foreach (var item in Model){
           if (item.status == "completo"){
-            <div>
+            <div class="task">
                 <p><b>Descrição: </b>@item.descricao</p>
                 <p><b>Setor: </b>@item.nomeSetor</p>
                 <p><b>Prioridade: </b>@item.prioridade</p>
                 <p><b>Vinculado a: </b>@item.usuario.nome</p>
-                <button class="btn btn-primary">Editar</button>
-                <button class="btn btn-primary">Excluir</button>
+                <a class="btn btn-primary" asp-controller="Atividades" asp-action="Edit" asp-route-id="@item.IdAtividade">Editar</a>
+                <a class="btn btn-primary" asp-controller="Atividades" asp-action="Delete" asp-route-id="@item.IdAtividade">Excluir</a>
                 <div>
                 <form asp-controller="Home" asp-action="AlterarStatus" method="post">
                   <div asp-validation-summary="ModelOnly" class="text-danger"></div>
